@@ -39,14 +39,17 @@
 	
 	jQuery.autogrow = function (e, o)
 	{
-		this.options		  	= o || {};
-		this.dummy			  	= null;
-		this.interval	 	  	= null;
-		this.line_height	  	= this.options.lineHeight || parseInt(jQuery(e).css('line-height'));
-		this.min_height		  	= this.options.minHeight || parseInt(jQuery(e).css('min-height'));
-		this.max_height		  	= this.options.maxHeight || parseInt(jQuery(e).css('max-height'));
-		this.expand_callback	= this.options.expandCallback;
-		this.textarea		  	= jQuery(e);
+		this.options		  	    = o || {};
+		this.dummy			  	    = null;
+		this.interval	 	  	    = null;
+		this.line_height	  	    = this.options.lineHeight || parseInt(jQuery(e).css('line-height'));
+		this.min_height		  	    = this.options.minHeight || parseInt(jQuery(e).css('min-height'));
+		this.max_height		  	    = this.options.maxHeight || parseInt(jQuery(e).css('max-height'));
+		this.expand_callback	    = this.options.expandCallback;
+        this.before_expand_callback = this.options.beforeExpandCallback;
+        this.after_expand_callback  = this.options.afterExpandCallback;
+
+        this.textarea		  	    = jQuery(e);
 		
 		if(this.line_height == NaN)
 		  this.line_height = 0;
@@ -70,12 +73,19 @@
 			this.checkExpand();	
 		},
 						 
-		startExpand: function() {				
-		  var self = this;
-			this.interval = window.setInterval(function() {self.checkExpand()}, 400);
+		startExpand: function() {
+            var self = this;
+            if (this.before_expand_callback) {
+                self.before_expand_callback();
+            }
+            this.interval = window.setInterval(function() {self.checkExpand()}, 400);
 		},
 		
 		stopExpand: function() {
+            if (this.after_expand_callback) {
+                var self = this;
+                self.after_expand_callback();
+            }
 			clearInterval(this.interval);	
 		},
 		
