@@ -35,7 +35,8 @@ textarea's css styling.
 
 ## Authors
 
-Original author: Chrys Bader (www.chrysbader.com)
-Advanced Callbacks and Documentation: Pete Michaud (www.petermichaud.com)
+*  Original author: Chrys Bader (www.chrysbader.com)
 
-Tell someone you love them today, life is short.
+*  Advanced Callbacks and Documentation: Pete Michaud (www.petermichaud.com)
+
+*  Tell someone you love them today, life is short. 8)
